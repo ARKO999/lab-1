@@ -5,8 +5,8 @@ $confs = [
            130 => "С двумя открывающимися створками",
            125 => "Балконный блок " ,
            133 => "Французский балконный блок" ,
-           148 =>"Одностворчатые двери",
-           122 =>"Штульповые двери"
+           148 => "Одностворчатые двери",
+           122 => "Штульповые двери"
 		  ];
 
     
@@ -22,7 +22,7 @@ $prof = [
            25 => "Goodwin Proline 70" ,
            101 => "Goodwin Euroline Plus" ,
 		   100 => "Goodwin TOPLINE" ,
-		   105 =>"Goodwin Euroline"
+		   105 => "Goodwin Euroline"
 		  ];
 		   
 		   
@@ -40,7 +40,7 @@ $dzen = [
 		   
 		   
 		 
-		$cheks =   [
+		$cheks = [
     'dop_montaj' => [
         'name' => "Монтаж",
         'price' => 30,
@@ -64,7 +64,7 @@ $dzen = [
 	];
 ?>
 <html>
-html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <title>Lab1-windows</title>
@@ -78,23 +78,67 @@ html lang="ru">
  </div>
  </form>
 </div>
-<form class="configuration"  method="post" action="https://http:index.php>
+
             <div class="field">
                 
 				<label>Конфигурация</label>
 
                 <select name="Conf">
 				
-				</html>
-                   
 				   <?php
                     foreach($confs as $price=>$type){?>
                         <option value="<?php echo $price;?>"><?php echo $type;?></option>
                     <?php }?>
                 </select>
-            </div>
-
-            <div class="two fields">
+				</form>	
+					
+		<div class="field">
+                <label>Профиль</label>
+			<select  name="Prof">
+                    <?php
+                foreach($prof as $price=>$type){?>
+                        <option value="<?php echo $price;?>"><?php echo $type;?></option>
+						<?php } ?>
+			</select>
+				
+		
+			<div class="grou field">
+                <label>Тип стеклопакета:</label>
+					<select  name="dzen">
+				<?php
+                 foreach ($dzen as $price=>$type)
+                {?>
+                 <div class="field">
+                        <div class="checkbox">
+                           <option value="<?php echo $price;?>"><?php echo $type;?></option>
+						<?php } ?>
+                            
+                        </div>
+                    </div>
+				</select>
+				
+                <div class="dop">
+                    <label> Дополнительные услуги:</label>
+					<select name="cheks"
+                    <?php
+                 foreach ($cheks as $price=>$type)
+                {?>
+                 <div class="checks">
+                        <div class="checkbox">
+                           <option value="<?php echo $price;?>"><?php echo $type;?></option>
+						<?php } ?>
+                    
+                
+                <?php 
+				 foreach ($cheks as $key=>$type){?>
+                 <div class="field">
+                    <div class=" checkbox">
+                        <input type="checkbox" name="<?php echo $key;?>" value="<?php echo $type['price'];?>>" checked>
+                        <label><?php echo $type['name'],$type['price'], ' грн'; ?></label>
+                    </div>
+                </div>
+               <?php }?>
+			   <div class="two fields">
                 <div class="field">
                     <label>Ширина(см)</label>
                     <input type="number" name="Width" placeholder="Width">
@@ -104,43 +148,11 @@ html lang="ru">
                     <input type="number" name="Height" placeholder="Height">
                 </div>
             </div>
-			
-		<div class="field">
-                <label>Профиль</label>
-			<select class="prof" name="Prof">
-                    <?php
-                    foreach($profs as $price=>$type)?>
-                        <option value="<?php echo $price;?>">
-						<?php echo $type;?>
-						</option>
-			</select>
-			<div class="grou field">
-                <label>Тип стеклопакета:</label>
-				
-				<?php
-                foreach($dzens as $price=>$type){?>
-                    <div class="field">
-                        <div class="checkbox">
-                            <input name="dzen" type="radio" value="<?php echo $price;?>">
-                            <label><?php echo $type;?></label>
-                        </div>
-                    </div>
-                <?php }?>
-
-                <div class="grou filed">
-                    <label>Дополнительные услуги</label>
-                </div><?php foreach ($checks as $key=>$type){?>
-                 <div class="field">
-                    <div class="ui checkbox">
-                        <input type="checkbox" name="<?php echo $key;?>" value="<?php echo $type['price'];?>>" checked>
-                        <label><?php echo $type['name'],$type['price'], ' грн'; ?></label>
-                    </div>
-                </div>
-               <?php }?>
             </div>
-            <button  class="pform" type="submit">Сделать заказ
-            </button>
-        </form>													
+			
+		
+            <button  type="submit">Сделать заказ</button>
+            </div>												
         </p>
     </div>
 </div>
@@ -150,23 +162,11 @@ html lang="ru">
 if (!empty($_POST["Conf"]) && !empty($_POST["Width"]) && is_numeric($_POST["Width"]) && is_numeric($_POST["Height"]) && !empty($_POST["Height"])
     && !empty($_POST["Prof"]) && !empty($_POST["dzen"])) {
         $Sum = $_POST["Width"] * $_POST["Height"] + $_POST["Conf"] + $_POST["dzen"] + $_POST["Prof"] +
-            $_POST["a"] + $_POST["b"] + $_POST["c"] + $_POST["d"] + $_POST["e"];
-        ?>
-<p><strong>
-		  Размер окна:</strong></p>
-          <table border="0" cellpadding="0" cellspacing="0">
-              <tr>
-                <td width="270px">Высота окна (1см)</td>
-			
-                <td><input id="" name="" size="1" type="text" value="0"> 10грн.</td>
-              </tr>
-          </table>
+            $_POST["cheks"];
+    }       
+            ?>
+			  <h2 align="left">Цена<?php echo $Sum ?></h2>
+	
+		
+		
 
-          <table border="0" cellpadding="0" cellspacing="0">
-              <tr>
-                <td width="270px">Ширина окна (1см)</td>
-			
-                <td><input id="" name="" size="1" type="text" value="0"> 10грн.</td>
-              </tr>
-          </table>
-</div>
